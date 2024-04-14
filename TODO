@@ -1,0 +1,26 @@
+install node modules 
+npm install pg
+
+client side MY NOTES
+* Create a front-end experience that allows a user to create a to-do item.
+  - collect user inputs and send it to the DB
+  - retrieve TODO data from DB and render on the DOM
+  - Delete and update function 
+
+
+
+
+* When a to-do item is created:
+    * It should be stored inside the database table.
+    * The DOM should update and display the new to-do item.
+
+* Each to-do item should have a button to 'Complete' or 'Delete' it.
+* When a to-do item is completed:
+    * Its `isComplete` value (in the database table) should be updated to `TRUE`.
+    * A CSS class of `completed` should be applied to the to-do item.
+        * This class should make it visually clear that the to-do is complete.
+        * Example, the background of the to-do item could change from gray to green.
+            * *Not a requirement, but*: It'd greatly improve the user experience if the "complete" button appears to be somehow checked-off or disabled when a to-do has been marked as completed.
+* When a to-do item is deleted:
+  * It should be removed from the database table.
+  * The DOM should update to show that list no longer includes the deleted to-do item.

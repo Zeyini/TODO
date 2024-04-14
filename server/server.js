@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 
+//todoRouter
 const todos = require('./routes/todos.router.js');
 
 let PORT = process.env.PORT || 5001;
@@ -13,6 +14,7 @@ if (process.env.NODE_ENV == 'test') {
 app.use(express.static('./server/public'));
 app.use(express.json());
 
+// incoming request Routes forwarded to todoRouter
 app.use('/todos', todos);
 
 app.listen(PORT, () => {
