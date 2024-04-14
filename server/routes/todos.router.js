@@ -31,29 +31,30 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     console.log('req.body', req.body);
   
-    const todo = req.body.item;
+ const text = req.body.item;
+console.log(text);
  
     // Need to send a 'INSERT INTO songs' SQL query
     // to our database, containing the data from
     // req.body:
-    const sqlText = `
-      INSERT INTO koalas
-        (name, age, favorite_color, ready_to_transfer, notes)
-        VALUES
-        ($1, $2, $3, $4, $5);
-    `
-    const sqlValues = [name, age, color, transferReady, notes];
-  
-    console.log('SQL values',sqlValues);
+                                const sqlText = `
+                                INSERT INTO "todos"
+                                ("text")
+                                VALUES 
+                                ($1);
+                                `
+                                const sqlValues = [text];
+                            
+                                console.log('SQL todo values',sqlValues);
 
-    // Use le pool to send this SQL query to our database:
-    pool.query(sqlText, sqlValues)
+                                // // Use le pool to send this SQL query to our database:
+                                pool.query(sqlText, sqlValues)
       .then((dbRes) => {
         // if pool query worked it will do .then on client side
         res.sendStatus(201);  //bc it worked we are sendign ok created to the cleint 
       })
       .catch((dbErr) => {
-        console.log('Failsauce in POST /koalas', dbErr);
+        console.log('Failsauce in POST /ToDos', dbErr);
         res.sendStatus(500);
       })
   });

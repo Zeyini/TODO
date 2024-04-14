@@ -47,7 +47,7 @@ function getTodoItem(){
         <button data-testid="completeButton" onclick="markComplete(${todo.id})" class="completed">Completion Status</button>
       </td> 
       <td>
-      <button data-testid="deleteButton" onclick="deleteKoala(${todo.id})">Delete</button>
+      <button data-testid="deleteButton" onclick="deletetoDOitem(${todo.id})">Delete</button>
     </td>
 
         `
@@ -68,11 +68,15 @@ function addToDOitem(event){
     console.log( 'We have a todo-item' );
     // axios call to server to add a koalas
     let item = document.getElementById('usertext').value;
-  
+
+  console.log(item);
+
   let todo = {
     item:item
   }
   
+  console.log(todo);
+
   // clear input fields
   document.getElementById('usertext').value = '';
   
@@ -92,3 +96,19 @@ function addToDOitem(event){
   
   }
     
+//   --------------------------- delete a todo item --------------------------
+
+
+function deletetoDOitem(id) {
+  axios({
+    method: "DELETE",
+    url: `/todos/${id}`,
+  })
+  .then(function(response) {
+    getTodoItem()// < bringing dom in sync with DB
+  })
+  .catch(function(error) {
+    alert("Error deleting todo item")
+  })
+
+}
