@@ -2,7 +2,7 @@ console.log('JS is sourced!');
 
 function getTodoItem(){
     console.log( 'client side request for todo data' );
-    // axios call to server to get koalas
+    // axios call to server to get todos
   
    
       axios({
@@ -14,7 +14,7 @@ function getTodoItem(){
           let todos = response.data;
           console.log(todos);
 
-        //   renderKoalas(koalas) //render koals ------------------------- penidng 
+        //  -------------render todos ------------------------- 
         renderTodos(todos)
 
         })
@@ -34,7 +34,7 @@ function getTodoItem(){
         console.log(wheretoPutTodos);
         wheretoPutTodos.innerHTML = ''; 
 
-        console.log(wheretoPutTodos.innerHTML);
+    
     
     for (let todo of todos) {
 
@@ -44,16 +44,28 @@ function getTodoItem(){
         <td data-testid="toDoItem"> ${todo.text}</td>
         <td data-testid="toDoItem"> ${todo.isComplete}</td> 
         <td>
-        <button data-testid="completeButton" onclick="markComplete(${todo.id})" class="completed">Completion Status</button>
+        <button data-testid="completeButton" onclick="markComplete(${todo.id})" class="completed${todo.id}" >Completion Status</button>
       </td> 
       <td>
       <button data-testid="deleteButton" onclick="deletetoDOitem(${todo.id})">Delete</button>
     </td>
 
-        `
+`
+// ----- logic within a loop
 
-  }
+if (todo.isComplete === true) {
+    let completedButton = document.querySelector(`.completed${todo.id}`);
+    completedButton.innerText = 'Completed';
+    completedButton.classList.add('completed');
+} 
 
+// else {
+//     completedButton.innerText = 'Completion Status';
+//     completedButton.classList.remove('completed');
+// }
+
+}
+// ------
 
 }
 
@@ -66,7 +78,7 @@ function addToDOitem(event){
     event.preventDefault();
   
     console.log( 'We have a todo-item' );
-    // axios call to server to add a koalas
+    // axios call to server to add a todos
     let item = document.getElementById('usertext').value;
 
   console.log(item);
@@ -117,16 +129,19 @@ function deletetoDOitem(id) {
 // ------------------------------------------------- update completion status -----
 
 function markComplete(id) {
+
   
     axios({
       method: "PUT",
       url: `/todos/${id}`,
     })
     .then(function(response) {
+
      getTodoItem() // < bringing dom in sync with DB
     })
     .catch(function(error) {
       alert("Error changing todo completion status.")
+      console.error("Error changing todo completion status:", error)
     })
   
   }

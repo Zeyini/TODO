@@ -1,0 +1,13 @@
+.completed {
+    background-color: green;
+}
+body {
+    background-color: rgb(183, 173, 173);
+  
+    margin-left: 10%;
+    
+}
+
+th {
+    text-align: left;
+}

@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
         res.send(toDOsRequested);
       })
       .catch((dbError) => {
-        console.log('DB query failed inside GET /koalas!');
+        console.log('DB query failed inside GET /todos!');
         console.log('Error is:', dbError);
         res.sendStatus(500);
       })
@@ -79,6 +79,30 @@ router.delete('/:id', (req, res) => {
       })
       .catch((error) => {
         console.log('Error on /todo/:id', error)
+        res.sendStatus(500)
+      })
+  })
+
+  // Update
+
+  router.put('/:id', (req, res) => {
+    // get the id from the params, store in a variable called todoid
+    let todoID = req.params.id;
+    console.log('todoID is:', todoID)
+  
+  let sqlText = `
+  UPDATE todos 
+  SET "isComplete" = TRUE
+  WHERE id = $1;
+  `
+
+  
+    pool.query(sqlText, [todoID])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch((error) => {
+        console.log('Error on /todos/:id', error)
         res.sendStatus(500)
       })
   })
