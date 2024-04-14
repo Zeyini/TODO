@@ -112,3 +112,21 @@ function deletetoDOitem(id) {
   })
 
 }
+
+
+// ------------------------------------------------- update completion status -----
+
+function markComplete(id) {
+  
+    axios({
+      method: "PUT",
+      url: `/todos/${id}`,
+    })
+    .then(function(response) {
+     getTodoItem() // < bringing dom in sync with DB
+    })
+    .catch(function(error) {
+      alert("Error changing todo completion status.")
+    })
+  
+  }

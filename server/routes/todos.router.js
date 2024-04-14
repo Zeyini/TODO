@@ -60,6 +60,28 @@ console.log(text);
   });
 
 
+// DELETE
+
+router.delete('/:id', (req, res) => {
+    // get the id from the params, store in a variable called todoID
+    let todoID = req.params.id;
+    console.log('todoID is:', todoID)
+  
+    // 
+  let sqlText = `DELETE FROM todos
+  WHERE id = $1;`
+
+  // pool query sql text is first paramater of the function below and todoID 
+  //is an array of placeholder values. values always corrosponds with the placeholder $numbers.
+    pool.query(sqlText, [todoID])
+      .then(() => {
+        res.sendStatus(200)
+      })
+      .catch((error) => {
+        console.log('Error on /todo/:id', error)
+        res.sendStatus(500)
+      })
+  })
 
 
 module.exports = router;
