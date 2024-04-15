@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'test') {
 const pool = new pg.Pool({
     host: 'localhost',
     port: 5432,
-    database:'weekend-to-do-app',
+    database:databaseName,
     allowExitOnIdle: true 
 })
 
