@@ -38,31 +38,38 @@ function getTodoItem(){
     
     for (let todo of todos) {
 
+      if (todo.isComplete === false) {
 
     wheretoPutTodos.innerHTML += `
-    <tr>
-        <td data-testid="toDoItem"> ${todo.text}</td>
-        <td data-testid="toDoItem"> ${todo.isComplete}</td> 
+    <tr data-testid="toDoItem" >
+        <td> ${todo.text}</td>
+        <td> ${todo.isComplete}</td> 
         <td>
-        <button data-testid="completeButton" onclick="markComplete(${todo.id})" class="completed${todo.id}" >Completion Status</button>
+        <button data-testid="completeButton" onclick="markComplete(${todo.id})">Completion Status</button>
       </td> 
       <td>
       <button data-testid="deleteButton" onclick="deletetoDOitem(${todo.id})">Delete</button>
     </td>
-
+<tr>
 `
-// ----- logic within a loop
+      } else {
+        wheretoPutTodos.innerHTML += `
+        <tr data-testid="toDoItem" class="completed">
+            <td> ${todo.text}</td>
+            <td> ${todo.isComplete}</td> 
+            <td>
+            <button data-testid="completeButton" onclick="markComplete(${todo.id})" id="buttonID${todo.id}" class="buttoncompleted">Completion Status</button>
+          </td> 
+          <td>
+          <button data-testid="deleteButton" onclick="deletetoDOitem(${todo.id})">Delete</button>
+        </td>
+    <tr>
+    `
+    document.getElementById(`buttonID${todo.id}`).innerText = 'completed';
+      }
 
-if (todo.isComplete === true) {
-    let completedButton = document.querySelector(`.completed${todo.id}`);
-    completedButton.innerText = 'Completed';
-    completedButton.classList.add('completed');
-} 
 
-// else {
-//     completedButton.innerText = 'Completion Status';
-//     completedButton.classList.remove('completed');
-// }
+
 
 }
 // ------

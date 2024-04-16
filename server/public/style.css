@@ -1,6 +1,13 @@
 .completed {
-    background-color: green;
+    background-color: rgba(215, 224, 215, 0.815);
 }
+
+.buttoncompleted {
+    background-color: rgb(208, 5, 5);
+
+}
+
+
 body {
     background-color: rgb(183, 173, 173);
   

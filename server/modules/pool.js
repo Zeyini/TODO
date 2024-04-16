@@ -14,3 +14,4 @@ const pool = new pg.Pool({
 })
 
 module.exports = pool
+
